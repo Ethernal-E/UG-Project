@@ -14,15 +14,18 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
     
+    - name: Clean auxiliary files
+      run: rm -f project-templates-main-ug/ug/*.aux project-templates-main-ug/ug/*.bbl project-templates-main-ug/ug/*.blg
+    
     - name: Compile LaTeX document
       uses: xu-cheng/latex-action@v2
       with:
         root_file: project-templates-main-ug/ug/skeleton.tex
-        work_in_root_file_dir: true  # Ensures the compiler runs in the directory containing the root file
-
+        work_in_root_file_dir: true
+        args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -f
+    
     - name: Upload PDF to GitHub Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: document
-        path: project-templates-main-ug/ug/skeleton.pdf  # Update if output file is named differently
-
+        path: project-templates-main-ug/ug/skeleton.pdf
