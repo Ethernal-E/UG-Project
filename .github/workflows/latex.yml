@@ -18,9 +18,11 @@ jobs:
       uses: xu-cheng/latex-action@v2
       with:
         root_file: project-templates-main-ug/ug/skeleton.tex
+        work_in_root_file_dir: true  # Ensures the compiler runs in the directory containing the root file
 
     - name: Upload PDF to GitHub Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: document
-        path: main.pdf
+        path: project-templates-main-ug/ug/skeleton.pdf  # Update if output file is named differently
+
